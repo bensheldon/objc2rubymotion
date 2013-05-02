@@ -101,9 +101,27 @@ describe "Converter", ->
     converter = new Converter source
     converter.remove_type_declaration().s.should.equal expected
 
+  it "removes multiple type declarations", ->
+    source   =  """
+                UIWindow* aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+                UIWindow* bWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]
+                """
+    expected =  """
+                aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+                bWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]
+                """
+
+    converter = new Converter source
+    converter.remove_type_declaration().s.should.equal expected
+
   it 'converts multiline expression', ->
     source   =  """
-                UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Warning"
+                UIAlertView* alertA = [[[UIAlertView alloc] initWithTitle:@"Warning"
+                                                                 message:@"too many alerts"
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil] autorelease];
+                UIAlertView* alertB = [[[UIAlertView alloc] initWithTitle:@"Warning"
                                                                  message:@"too many alerts"
                                                                 delegate:nil
                                                        cancelButtonTitle:@"OK"
@@ -111,7 +129,8 @@ describe "Converter", ->
                 [alert show];
                 """
     expected =  """
-                alert = UIAlertView.alloc.initWithTitle("Warning",message:"too many alerts",delegate:nil,cancelButtonTitle:"OK",otherButtonTitles:nil)
+                alertA = UIAlertView.alloc.initWithTitle("Warning",message:"too many alerts",delegate:nil,cancelButtonTitle:"OK",otherButtonTitles:nil)
+                alertB = UIAlertView.alloc.initWithTitle("Warning",message:"too many alerts",delegate:nil,cancelButtonTitle:"OK",otherButtonTitles:nil)
                 alert.show
                 """
 

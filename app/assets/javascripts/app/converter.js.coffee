@@ -68,7 +68,7 @@ class Converter
   convert_square_brackets_expression: ->
     max_attempt = 10 # Avoid infinite loops
     attempt_count = 0
-    square_pattern = /\[([^\[\]]+?)\s+([^\[\]]+?)\]/
+    square_pattern = /\[([^\[\]]+?)\s+([^\[\]]+?)\]/g
 
     loop
       attempt_count += 1
@@ -92,7 +92,9 @@ class Converter
     return this
 
   remove_type_declaration: ->
-    @s = @s.replace /^(\s*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=/g, '$1$2='
+    console.log @s
+    @s = @s.replace /([^\s\S]*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=/gm, '$1$2='
+    console.log @s
 
     return this
 
