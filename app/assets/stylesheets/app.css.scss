@@ -3,6 +3,14 @@
  *= require ./bootstrap-combined.min
 */
 
+#mocha-stats {
+  background-color: white;
+
+  li {
+    height: 40px;
+  }
+}
+
 h1#title {
   text-align: center;
 }

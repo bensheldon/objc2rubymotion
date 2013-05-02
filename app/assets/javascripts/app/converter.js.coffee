@@ -92,9 +92,7 @@ class Converter
     return this
 
   remove_type_declaration: ->
-    console.log @s
     @s = @s.replace /([^\s\S]*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=/gm, '$1$2='
-    console.log @s
 
     return this
 
