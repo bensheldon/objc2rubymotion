@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %title Objc2Rubymotion Tests
+    %script{:src => "assets/javascripts/vendor.js"}
+    %script{:src => "assets/javascripts/app.js"}
+
+    / Mocha, Chai, Sinon
+    %script{:src => "assets/javascripts/vendor_specs.js"}
+
+    %link{:href => "assets/stylesheets/app.css", :rel => "stylesheet"}
+    %link{:href => "assets/stylesheets/mocha.css", :rel => "stylesheet"}
+  %body
+    #mocha
+
+    / Setup Mocha, include specs, run
+    :javascript
+      mocha.setup({ ui: 'bdd', globals: ['jQ*'] })
+    %script{:src => "assets/javascripts/specs.js"}
+    :javascript
+      mocha.run();
+
