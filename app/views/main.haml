@@ -1,11 +1,23 @@
 !!!
-%html
+%html{lang: "en"}
   %head
-    %title Ember-Sinatra-Moc
+    %title Objective-C to Rubymotion Converter
     %script{:src => "assets/javascripts/vendor.js"}
     %script{:src => "assets/javascripts/app.js"}
     %link{:href => "assets/stylesheets/app.css", :rel => "stylesheet"}/
   %body
 
-    %h1 STUFF GOES HERE
+    %h1#title Objective-C to Rubymotion Converter
 
+    #converter.row
+      %div.objc
+        %h2 Objective-C
+        %textarea= @placeholder
+      %div.rubymotion
+        %h2 RubyMotion
+        %pre
+
+    %p#about-converter
+      %a{href: "http://github.com/bensheldon/objc2rubymotion"} Github
+      &bull;
+      %a{href: "/test" } Features and Tests

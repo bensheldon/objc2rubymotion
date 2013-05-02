@@ -1,13 +1,33 @@
 class Converter
   constructor: (string) ->
+    @orig = string
     @s = string
+
+
+  result: ->
+    @multilines_to_one_line()
+    @replace_nsstring()
+    @mark_spaces_in_string()
+    @convert_square_brackets_expression()
+    @remove_semicolon_at_the_end()
+    @remove_autorelease()
+    @remove_type_declaration()
+    @restore_spaces_in_string()
+
+    #allow idempotency
+    result = @s
+    @s = @orig
+
+    return result
+
+  # HELPERS
 
   convert_args: (match, groups...) =>
     # Consider args with colon followed by spaces
-    following_args = groups[1].replace /([^:]+)(\s+)(\S+):/, '$1,$3:'
+    following_args = groups[1].replace /([^:]+)(\s+)(\S+):/g, '$1,$3:'
 
     # Clear extra spaces after colons
-    following_args = following_args.replace /:\s+/, ':'
+    following_args = following_args.replace /:\s+/g, ':'
 
     return "#{groups[0]}(#{following_args})"
 
@@ -17,7 +37,35 @@ class Converter
     msg = groups[1].replace(arg_pattern, @convert_args)
     return "#{groups[0]}.#{msg}"
 
-  convert_square_brackets_expression: () ->
+  space_to_mark: (match, groups...) =>
+    return groups[0].replace /\s/g, '__SPACE__'
+
+  # CONVERSIONS
+
+  multilines_to_one_line: ->
+    # Remove trailing white space first. Refs: TrimTrailingWhiteSpace
+    @s = @s.replace /[\t ]+$/, ''
+    @s = @s.replace /([^;\s])$\n\s*/mg, '$1 '
+
+    return this
+
+  replace_nsstring: ->
+    @s = @s.replace /@("(?:[^\\"]|\\.)*")/g, '$1'
+
+    return this
+
+   mark_spaces_in_string: ->
+    @s = @s.replace /("(?:[^\\"]|\\.)*")/g, @space_to_mark
+
+    return this
+
+   restore_spaces_in_string: ->
+     @s = @s.replace /__SPACE__/g, ' '
+
+     return this
+
+
+  convert_square_brackets_expression: ->
     max_attempt = 10 # Avoid infinite loops
     attempt_count = 0
     square_pattern = /\[([^\[\]]+?)\s+([^\[\]]+?)\]/
@@ -31,7 +79,21 @@ class Converter
       else
         break
 
-    this
+    return this
 
+  remove_semicolon_at_the_end: ->
+    @s = @s.replace /;/g, ''
+
+    return this
+
+  remove_autorelease: ->
+    @s = @s.replace /\.autorelease/g, ''
+
+    return this
+
+  remove_type_declaration: ->
+    @s = @s.replace /^(\s*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=/g, '$1$2='
+
+    return this
 
 @Converter = Converter
