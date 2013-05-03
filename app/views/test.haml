@@ -15,7 +15,7 @@
 
     / Setup Mocha, include specs, run
     :javascript
-      mocha.setup({ ui: 'bdd', globals: ['jQ*'] })
+      mocha.setup({ ui: 'bdd', globals: ['jQ*', 'GoogleAnalyticsObject', 'ga', 'gaplugins'] })
     %script{:src => "assets/javascripts/specs.js"}
     :javascript
       mocha.run();
