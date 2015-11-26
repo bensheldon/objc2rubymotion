@@ -22,13 +22,13 @@ Development
 
 Install it locally.
 
-```
-$ bundle install`
+```bash
+$ bundle install
 ```
 
 Run it:
 
-```
+```bash
 $ shotgun -p 3000
 ```
 
