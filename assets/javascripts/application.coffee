@@ -1,3 +1,5 @@
+---
+---
 class Converter
   constructor: (string) ->
     @orig = string
@@ -20,10 +22,10 @@ class Converter
 
     return result
 
-  # HELPERS
+# HELPERS
 
   convert_args: (match, groups...) =>
-    # Consider args with colon followed by spaces
+# Consider args with colon followed by spaces
     following_args = groups[1].replace /([^:]+)(\s+)(\S+):/g, '$1,$3:'
 
     # Clear extra spaces after colons
@@ -40,10 +42,10 @@ class Converter
   space_to_mark: (match, groups...) =>
     return groups[0].replace /\s/g, '__SPACE__'
 
-  # CONVERSIONS
+# CONVERSIONS
 
   multilines_to_one_line: ->
-    # Remove trailing white space first. Refs: TrimTrailingWhiteSpace
+# Remove trailing white space first. Refs: TrimTrailingWhiteSpace
     @s = @s.replace /[\t ]+$/, ''
     @s = @s.replace /([^;\s])$\n\s*/mg, '$1 '
 
@@ -54,15 +56,15 @@ class Converter
 
     return this
 
-   mark_spaces_in_string: ->
+  mark_spaces_in_string: ->
     @s = @s.replace /("(?:[^\\"]|\\.)*")/g, @space_to_mark
 
     return this
 
-   restore_spaces_in_string: ->
-     @s = @s.replace /__SPACE__/g, ' '
+  restore_spaces_in_string: ->
+    @s = @s.replace /__SPACE__/g, ' '
 
-     return this
+    return this
 
 
   convert_square_brackets_expression: ->
@@ -97,3 +99,17 @@ class Converter
     return this
 
 @Converter = Converter
+
+$().ready ->
+  objc = $('.objc textarea')
+  rubymotion = $('.rubymotion pre')
+
+  if objc.length and rubymotion.length
+    convert = ()->
+      converter = new Converter objc.val()
+      rubymotion.html converter.result()
+
+    convert()
+
+    $('.objc textarea').bind 'input propertychange', ->
+      convert()

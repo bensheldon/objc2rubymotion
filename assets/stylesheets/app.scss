@@ -1,7 +1,7 @@
-/*
- *= require_self
- *= require ./bootstrap-combined.min
-*/
+---
+---
+
+{% include_relative bootstrap-combined.min.css %}
 
 #mocha-stats {
   background-color: white;
@@ -17,7 +17,6 @@ h1#title {
 
 
 #converter {
-
     .objc,
     .rubymotion {
       padding: 20px 4% 20px 4%;

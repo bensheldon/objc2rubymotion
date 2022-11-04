@@ -1,8 +1,5 @@
-source :rubygems
+source 'https://rubygems.org'
+ruby File.read(File.join(File.dirname(__FILE__), '.ruby-version')).strip
 
-gem 'sinatra', require: 'sinatra/base'
-gem "sprockets", "~> 2.9.3"
-gem "shotgun", "~> 0.9"
-gem 'coffee-script'
-gem 'haml'
-gem 'sass'
+gem "jekyll"
+gem "jekyll-coffeescript"
