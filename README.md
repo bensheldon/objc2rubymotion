@@ -33,7 +33,5 @@ Run it:
 $ bundle exec jekyll serve
 ```
 
-Then:
- - Visit it: `http://localhost:4000`
- - Test it: `http://localhost:4000/test`
+Visit it: http://localhost:4000/objc2rubymotion
 
