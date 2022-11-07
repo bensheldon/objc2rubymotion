@@ -1,14 +1,16 @@
+---
+---
 <!DOCTYPE html>
 <html>
   <head>
     <title>Objc2RubyMotion Tests</title>
-    <link href='/assets/stylesheets/app.css' rel='stylesheet'>
-    <script src='/assets/javascripts/vendor.js'></script>
-    <script src='/assets/javascripts/application.js'></script>
+    <link href='{{site.baseurl}}/assets/stylesheets/app.css' rel='stylesheet'>
+    <script src='{{site.baseurl}}/assets/javascripts/vendor.js'></script>
+    <script src='{{site.baseurl}}/assets/javascripts/application.js'></script>
 
     <!-- Mocha, Chai, Sinon -->
-    <script src='/assets/javascripts/vendor_specs.js'></script>
-    <link href='/assets/stylesheets/mocha.css' rel='stylesheet'>
+    <script src='{{site.baseurl}}/assets/javascripts/vendor_specs.js'></script>
+    <link href='{{site.baseurl}}/assets/stylesheets/mocha.css' rel='stylesheet'>
   </head>
   <body>
     <div id='mocha'></div>
@@ -17,7 +19,7 @@
     <script>
       mocha.setup({ ui: 'bdd', globals: ['jQ*', 'GoogleAnalyticsObject', 'ga', 'gaplugins'] })
     </script>
-    <script src='assets/javascripts/specs.js'></script>
+    <script src='{{site.baseurl}}/assets/javascripts/specs.js'></script>
     <script>
       mocha.run();
     </script>

@@ -1,9 +1,8 @@
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/objc2rubymotion" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 plugins:
   - jekyll-coffeescript
-
 
 # Exclude from processing.
 # The following items will not be processed, by default.
