@@ -1,7 +1,7 @@
 objc2rubymotion
 ===============
 
-**Objective-C to Rubymotion Converter**: Use it at http://objc2rubymotion.herokuapp.com/
+**Objective-C to Rubymotion Converter**: Use it at https://bensheldon.github.io/objc2rubymotion/
 
 Based on the [Sublime-ObjcToRubyMotion](https://github.com/thinkclay/Sublime-ObjcToRubyMotion) plugin. Inspiration to the [Atom-Objc2Rubymotion](https://github.com/ahmetabdi/atom-objc-2-rubymotion) plugin.
 
